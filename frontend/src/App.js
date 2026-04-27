@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API = process.env.REACT_APP_API_URL || 'http://localhost: 5000';
+const API = process.env.REACT_APP_API_URL || 'https://item-manager-production-79ca.up.railway.app';
 
 function App(){
   const[items, setItems] = useState([]);
@@ -17,7 +17,7 @@ function App(){
   }, []);
 
   const fetchItems = async () =>{
-    const res = await axios.get('${API}/api/items');
+    const res = await axios.get(`${API}/api/items`);
     
   }
 }
