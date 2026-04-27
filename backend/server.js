@@ -18,13 +18,12 @@ app.use('/api/items', itemRoutes);
 // Health check
 app.get('/', (req, res) => res.send('API is running'));
 
-// Connect to MongoDB and start server
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL)
-    .then(() => {
-        console.log('MongoDB connected');
-        app.listen(process.env.PORT || 5000, () =>
-            console.log(`Server running on port ${process.env.PORT || 5000}`)
-        );
-    })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
-    .catch(err => console.error(err));
+// Start server regardless of DB state
+app.listen(process.env.PORT || 5000, () =>
+    console.log(`Server running on port ${process.env.PORT || 5000}`)
+);
